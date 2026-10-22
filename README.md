@@ -1,33 +1,6 @@
 # GLOW vs. Cool-chic on Kodak
 
-Visual comparison of GLOW and Cool-chic 4.2.1 (WD + MSE) on all 24 Kodak images, at about 0.13 bpp.
-
-Each image has two figures:
-
-- `kodimNN_crop`: Ground Truth (full image, red box) | crop of Ground Truth | GLOW | Cool-chic (WD + MSE).
-- `kodimNN_full`: full Ground Truth | GLOW | Cool-chic (WD + MSE).
-
-Titles give bpp / PSNR (dB) / DISTS of the full image. PNG figures are in `png/`, PDF versions in `pdf/`, and the
-crop windows and per-image numbers in `crops.json`.
-
-## Settings
-
-| | GLOW | Cool-chic (WD + MSE) |
-| --- | --- | --- |
-| Codec | DCAE (VAE-based, one model shared by all images) | Cool-chic 4.2.1, overfitted to each image |
-| Starting point | DCAE MSE checkpoint (`0.05checkpoint_best.pth.tar`) | trained from scratch per image |
-| Loss | λ·bpp + 0.25·WA-WD (σ = 32) + 0.1·LPIPS + 1.0·Grid Loss (period 16) | distortion + λ·rate, distortion = 0.8·WD (σ = 8) + 0.2·MSE (`--tune=wasserstein`) |
-| Rate point | λ = 1.25, iteration 9000 | fixed λ = 0.28 for every image (not rate-matched per image) |
-| Training | MLIC-Train-100K, 512² patches, batch 12, lr 1e-4 | `perceptive.cfg` (10k iterations, lr 1e-2), `hop.cfg` decoder |
-| Kodak mean bpp / PSNR / DISTS | 0.1248 / 26.02 / 0.0633 | 0.1317 / 21.00 / 0.0782 |
-
-- Bitrates are estimated, not measured on real bitstreams. GLOW: forward-pass entropy estimate. Cool-chic: the
-  encoder's `rate_bpp`, with its encoder-side decoded image.
-- PSNR is on 8-bit RGB. DISTS is the `pyiqa` implementation.
-- Crops are 256 × 384 px for portrait images and 192 × 288 px for landscape ones. They sit on the 16-px grid and
-  at least 16 px from every edge, because the Kodak files have a 1–3 px gray frame and a black last row or column.
-  Each crop is picked automatically as the window that ranks high in both structure and texture: the density of
-  strong edges, and the fine detail away from those edges. kodim04 uses a hand-picked crop.
+Visual comparison of GLOW and Cool-chic 4.2.1 (0.8·WD + 0.2·MSE) on all 24 Kodak images, at a dataset-mean bitrate of about 0.13 bpp.
 
 ## Figures
 
