@@ -1,6 +1,6 @@
 # GLOW vs. Cool-chic on Kodak
 
-Visual comparison on all 24 Kodak images, at dataset-mean bitrates of about 0.13 bpp: DCAE optimized for MSE, MS-SSIM, LPIPS, and GLOW (WD + Grid Loss), against Cool-chic 4.2.1 (0.8·WD + 0.2·MSE, σ = 8). Panel titles give bpp / PSNR (dB) / DISTS of the full image; bitrates are entropy-model estimates.
+Visual comparison on all 24 Kodak images, at dataset-mean bitrates of about 0.13 bpp: DCAE optimized for MSE, MS-SSIM, LPIPS, WD (σ = 32), and GLOW (WD + Grid Loss), against Cool-chic 4.2.1 (0.8·WD + 0.2·MSE, σ = 8). Panel titles give bpp / PSNR (dB) / DISTS of the full image; bitrates are entropy-model estimates.
 
 ## Figures
 
